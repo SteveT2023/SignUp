@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'congrat.dart';
 
 void main() => runApp(const MyApp());
 
@@ -74,7 +75,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
               }
-              if (!value.contains('@')) {
+              if (!(value.contains('@') && value.contains('.com'))) {
                 return 'Email invalid';
               }
             },
@@ -127,10 +128,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CongratScreen()),
                   );
                 }
               },
