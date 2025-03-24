@@ -39,10 +39,6 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController dobController = TextEditingController();
-  final TextEditingController pwController = TextEditingController();
 
 
   @override
@@ -56,7 +52,6 @@ class MyCustomFormState extends State<MyCustomForm> {
           SizedBox(height: 50),
           TextFormField(
             // The validator receives the text that the user has entered.
-            controller: nameController,
             decoration: const InputDecoration(
               labelText: 'Name',
               border: OutlineInputBorder()
@@ -70,7 +65,6 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           SizedBox(height: 50),
           TextFormField(
-            controller: emailController,
             decoration: const InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder()
@@ -86,7 +80,6 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           SizedBox(height: 50),
           TextFormField(
-            controller: dobController,
             decoration: const InputDecoration(
               labelText: 'Date of Birth',
               hintText: 'DD/MM/YYYY',
@@ -100,7 +93,6 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           SizedBox(height: 50),
           TextFormField(
-            controller: pwController,
             decoration: const InputDecoration(
               labelText: 'Password',
               border: OutlineInputBorder()
