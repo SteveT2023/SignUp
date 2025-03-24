@@ -39,7 +39,8 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  final TextEditingController dobController = TextEditingController();
+  String? dob;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +81,25 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           SizedBox(height: 50),
           TextFormField(
+            controller: dobController,
             decoration: const InputDecoration(
               labelText: 'Date of Birth',
-              hintText: 'DD/MM/YYYY',
-              border: OutlineInputBorder()
+              hintText: 'MM/DD/YYYY',
+              border: OutlineInputBorder(),
             ),
+            onTap: () async {
+              DateTime? dobPicked = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2030),
+              );
+              if (dobPicked != null) {
+                setState(() {
+                  dobController.text = '${dobPicked.month}/${dobPicked.day}/${dobPicked.year}';
+                });
+              }
+            },
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
