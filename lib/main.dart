@@ -39,6 +39,11 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController pwController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +53,65 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 50),
           TextFormField(
             // The validator receives the text that the user has entered.
+            controller: nameController,
+            decoration: const InputDecoration(
+              labelText: 'Name',
+              border: OutlineInputBorder()
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
               }
               return null;
+            },
+          ),
+          SizedBox(height: 50),
+          TextFormField(
+            controller: emailController,
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder()
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              if (!value.contains('@')) {
+                return 'Email invalid';
+              }
+            },
+          ),
+          SizedBox(height: 50),
+          TextFormField(
+            controller: dobController,
+            decoration: const InputDecoration(
+              labelText: 'Date of Birth',
+              hintText: 'DD/MM/YYYY',
+              border: OutlineInputBorder()
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+            },
+          ),
+          SizedBox(height: 50),
+          TextFormField(
+            controller: pwController,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder()
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              if (value.length > 10) {
+                return 'Password is too long. Max 10 character.';
+              }
             },
           ),
           Padding(
